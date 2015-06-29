@@ -91,7 +91,4 @@
       <Filter>Resource Files</Filter>
     </None>
   </ItemGroup>
-  <ItemGroup>
-    <Object Include="XTEA.obj" />
-  </ItemGroup>
 </Project>
