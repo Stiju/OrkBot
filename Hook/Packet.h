@@ -1,7 +1,5 @@
 #pragma once
 
-//extern "C" void __stdcall SendPacket(unsigned int, unsigned char*, bool, bool);
-//extern "C" int __stdcall XTEA(BOOL, DWORD, BYTE*, BYTE*, BYTE*, BOOL);
 extern "C" int __stdcall XTEA(BOOL, BYTE*, BYTE*, BYTE*);
 
 typedef int (WINAPI *_send)(SOCKET s, const char* buf, int len, int flags);

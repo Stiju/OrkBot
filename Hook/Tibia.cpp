@@ -177,18 +177,6 @@ unsigned int CTibia::GetEnemy(unsigned int nMinHealth)
 	return ret;
 }
 
-//bool CTibia::IsOnline(void)
-//{
-//	unsigned int *isOnline = (unsigned int*)Address::ISONLINE;
-//	return (*isOnline == 8);
-//}
-//
-//bool CTibia::IsPlayerState(PlayerStates ps)
-//{
-//	unsigned int *playerStates = (unsigned int*)Address::PLAYER_STATUS;
-//	return ((*playerStates & ps) > 0);
-//}
-
 bool CTibia::IsOnline(void)
 {
 	return (*(unsigned int*)Address::ISONLINE == 8);
@@ -270,10 +258,6 @@ int CTibia::AutoSelfHeal(void)
 					CPacket::UseOnTarget(HealItem.ItemID, 0x40 + cInfo.Container, cInfo.Position, *playerID);
 					bUsed = true;
 				}
-				//else
-				//{
-				//	SetWindowText(g_hWnd, "Healing Item not found!");
-				//}
 				if(bUsed == true)
 				{
 					if(bDoubleHeal == true)
@@ -416,12 +400,10 @@ int CTibia::AutoAllyHeal(void)
 	return 0;
 }
 
-/*
 void CTibia::MagwallTimer(void)
 {
 	char buf[32];
 	unsigned int *pointer = (unsigned int*)Address::GAMESCREENPTR;
-	//unsigned int *pointer2 = (unsigned int*)(*pointer + 0x2C);
 	unsigned int *pointer2 = (unsigned int*)(*pointer + 0x30);
 	unsigned int *pointer3 = (unsigned int*)(*pointer2 + 0x04);
 	SGameScreen *gs = (SGameScreen*)(*pointer3);
@@ -436,69 +418,6 @@ void CTibia::MagwallTimer(void)
 				Magwalls[i].Y >= c->Y-5 && Magwalls[i].Y <= c->Y+5 &&
 				Magwalls[i].Z == c->Z)
 			{
-				//int ztemp = 7 - Magwalls[i].Z - c->Z;
-				double sqmpx = (gs->Width - 2) / 15;
-				//double sqmpx = (gs->Height - 2) / 11;
-				int MoveX = (sqmpx / 32) * (abs(c->MoveX));
-				int MoveY = (sqmpx / 32) * (abs(c->MoveY));
-				MoveX = (c->MoveX > 0) ? -MoveX : MoveX;
-				MoveY = (c->MoveY > 0) ? -MoveY : MoveY;
-				int x = gs->X + (sqmpx * (7+ -(c->X - Magwalls[i].X))) + (sqmpx / 2) + MoveX;
-				int y = gs->Y + (sqmpx * (5+ -(c->Y - Magwalls[i].Y))) + (sqmpx / 2) - 5 + MoveY;
-				int time = (Magwalls[i].Time - t);
-				sprintf_s(buf, 32, "%.1f", (float)time/1000);
-				PrintText(1, (int)x, (int)y, 2, 239, 239, 0, buf, 1);
-			}
-		}
-	}
-}*/
-
-void CTibia::MagwallTimer(void)
-{
-	char buf[32];
-	unsigned int *pointer = (unsigned int*)Address::GAMESCREENPTR;
-	//unsigned int *pointer2 = (unsigned int*)(*pointer + 0x2C);
-	unsigned int *pointer2 = (unsigned int*)(*pointer + 0x30);
-	unsigned int *pointer3 = (unsigned int*)(*pointer2 + 0x04);
-	SGameScreen *gs = (SGameScreen*)(*pointer3);
-	SCreature *c = (SCreature*)CTibia::GetPlayer();
-
-	unsigned int t = timeGetTime();
-	for(int i = 0; i < MagwallArray; i++)
-	{
-		if(Magwalls[i].Time > t)
-		{
-			if(Magwalls[i].X >= c->X-7 && Magwalls[i].X <= c->X+7 && 
-				Magwalls[i].Y >= c->Y-5 && Magwalls[i].Y <= c->Y+5 &&
-				Magwalls[i].Z == c->Z)
-			{
-				/*//int ztemp = 7 - Magwalls[i].Z - c->Z;
-				double sqmpx = (gs->Width - 2) / 15;
-				//double sqmpx = (gs->Height - 2) / 11;
-				int MoveX = (sqmpx / 32) * (abs(c->MoveX));
-				int MoveY = (sqmpx / 32) * (abs(c->MoveY));
-				MoveX = (c->MoveX > 0) ? -MoveX : MoveX;
-				MoveY = (c->MoveY > 0) ? -MoveY : MoveY;
-				int wx = 0;
-				int wy = 0; //c->Y - *(int*)Address::PLAYER_GOTOY;
-				if(*(int*)Address::PLAYER_GOTOX != 0)
-				{
-					wx = c->X - *(int*)Address::PLAYER_GOTOX;
-					wy = c->Y - *(int*)Address::PLAYER_GOTOY;
-				}
-
-				/*if(c->IsWalking == 1)
-				{
-					switch(c->WalkDirection)
-					{
-					case 0: wy = 1; break;
-					case 1: wx = -1; break;
-					case 2: wy = -1; break;
-					case 3: wx = 1; break;
-					}
-				}* /
-				int x = gs->X + (sqmpx * (8 + -(c->X - Magwalls[i].X) + wx)) - (sqmpx / 2) + MoveX;
-				int y = gs->Y + (sqmpx * (6 + -(c->Y - Magwalls[i].Y) + wy)) - (sqmpx / 2) - 5 + MoveY;*/
 				double sqmpx = (double)(gs->Width - 2) / 15;
 
 				int MoveX = (int)((sqmpx / 32) * (abs(c->MoveX)));
@@ -521,7 +440,6 @@ void CTibia::SpellTimers(void)
 	char buf[32];
 	int time;
 	unsigned int *pointer = (unsigned int*)Address::GAMESCREENPTR;
-	//unsigned int *pointer2 = (unsigned int*)(*pointer + 0x2C);
 	unsigned int *pointer2 = (unsigned int*)(*pointer + 0x30);
 	unsigned int *pointer3 = (unsigned int*)(*pointer2 + 0x04);
 	SGameScreen *gs = (SGameScreen*)(*pointer3);
@@ -587,9 +505,6 @@ void CTibia::LevelSpy(void)
 		CMemory::Nop(Address::LEVELSPY3, 6);
 		if(bXRay == false)
 			XRay(true);
-		//unsigned int *pointer1 = (unsigned int*)Address::LEVELSPYPTR;
-		//unsigned int *pointer2 = (unsigned int*)(*pointer1 + 0x1C);
-		//unsigned int *pointer3 = (unsigned int*)(*pointer2 + 0x25D8);
 		int *playerZ = (int*)Address::PLAYER_Z;
 		levelSpyPZ = *playerZ;
 		if(levelSpyPZ <= 7)
@@ -614,8 +529,6 @@ void CTibia::LevelSpy(bool bLookUp)
 	unsigned int *pointer1 = (unsigned int*)Address::LEVELSPYPTR;
 	unsigned int *pointer2 = (unsigned int*)(*pointer1 + 0x28);
 	unsigned int *levelSpy = (unsigned int*)(*pointer2 + 0x5BC0);
-	//unsigned int *pointer2 = (unsigned int*)(*pointer1 + 0x28);
-	//unsigned int *levelSpy = (unsigned int*)(*pointer2 + 0x2A88);
 	int *playerZ = (int*)Address::PLAYER_Z;
 	char buf[256];
 	if(!bSpy1)
@@ -695,14 +608,6 @@ void CTibia::LevelSpy(bool bLookUp)
 
 void CTibia::ShootMagwall(int nTarget, int nSqm)
 {
-	//unsigned int *targetID = (unsigned int*)Address::PLAYER_ATTACK_ID;
-	//SCreature *c = (SCreature*)GetPlayer(*targetID);
-	//SCreature *c = 0;
-	//unsigned int *targetID = (unsigned int*)Address::PLAYER_ATTACK_ID;
-	//if(*targetID == 0)
-	//	return;
-	//SCreature *c = (SCreature*)GetPlayer(*targetID);
-
 	SCreature *c = 0;
 	switch(nTarget)
 	{
@@ -794,7 +699,6 @@ void CTibia::HotkeyShoot(int nItemID, int nTarget, int nMinHealth)
 		}break;
 	case HotkeyCreature::Target:
 		{
-			//unsigned int *targetID = (unsigned int*)Address::PLAYER_ATTACK_ID;
 			if(PlayerTarget == 0)
 				return;
 			c = (SCreature*)GetPlayer(PlayerTarget, true);
@@ -845,7 +749,6 @@ void CTibia::HotkeyShoot(int nItemID, int nTarget, int nMinHealth)
 void CTibia::Loot(void)
 {
 	int x = 0;
-	//SContainer *c;
 	for(unsigned int container = Address::CONTAINER_BEGIN; container < Address::CONTAINER_END; container += sizeof(SContainer), x++)
 	{
 		SContainer *c = (SContainer*)container;
@@ -914,7 +817,6 @@ void CTibia::AttackTarget(int nTarget)
 
 	if(c > 0)
 	{
-		//CPacket::Attack(c->CreatureID);
 		*(unsigned int*)Address::PLAYER_ATTACK_ID = c->CreatureID;
 	}
 }

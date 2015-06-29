@@ -170,14 +170,6 @@ int CALLBACK LootListProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 					AddItem(atoi(buf), bp);
 				}
 			}break;
-		//case IDC_LOOT_DEL:
-		//	{
-		//		int i = (int)SendMessage(hLootList, LB_GETCURSEL, 0, 0);
-		//		if(i != LB_ERR)
-		//		{
-		//			SendMessage(hLootList, LB_DELETESTRING, (WPARAM)i, (LPARAM)0);
-		//		}
-		//	}break;
 		case ID_LOOT_LOAD:
 			{
 				LoadLootList();

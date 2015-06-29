@@ -29,10 +29,6 @@ static HINSTANCE g_hInstance;
 char DLL[MAX_PATH] = "hook.dll";
 static HWND hWndList;
 SClient clients[32];
-//const unsigned int PLAYER_ID		= 0x00624C70;
-//const unsigned int BATTLELIST_BEGIN = 0x00624CD0;
-//const unsigned int BATTLELIST_END	= 0x0062AA90;
-//const unsigned int ISONLINE			= 0x0077D3F8;
 
 bool InjectLibrary(DWORD dwProcessId, char* strDll)
 {
@@ -180,7 +176,6 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 	{
 	case WM_CREATE:
 		{
-			//InitializeWindow(hWnd, g_hInstance);
 			HFONT hFont = CreateFont(8,0,0,0,FW_DONTCARE,0,0,0,
 				DEFAULT_CHARSET,OUT_DEFAULT_PRECIS,CLIP_DEFAULT_PRECIS,
 				DEFAULT_QUALITY,DEFAULT_PITCH | FF_DONTCARE, "MS Sans Serif");

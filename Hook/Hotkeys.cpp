@@ -10,10 +10,6 @@
 #include "Packet.h"
 #include "Hotkeys.h"
 
-//unsigned short Hotkey_LevelSpyUp = 0x006B;
-//unsigned short Hotkey_LevelSpyDown = 0x006D;
-//unsigned short Hotkey_ShootMagwall = 0x0060;
-
 SHotkey Hotkeys[11];
 bool isLooting = false;
 
@@ -84,9 +80,7 @@ void LoadHotkeys(void)
 	{
 		sprintf_s(buf, 32, "Hotkey%.2d", i);
 		Hotkeys[i].Key = ini.ReadInt("Hotkeys", buf, 0);
-		//sprintf_s(buf, 32, "Hotkey%.2d", i);
 		Hotkeys[i].Enabled = (bool)ini.ReadInt("HotkeysEnabled", buf, 0);
-		//sprintf_s(buf, 32, "Hotkey%.2d", i);
 		ini.ReadString("HotkeysCommand", buf, 0, Hotkeys[i].Command, 128);
 		if(Hotkeys[i].Enabled == true && CheckCommand(&Hotkeys[i]) == false)
 		{
@@ -119,9 +113,7 @@ void SaveHotkeys(void)
 	{
 		sprintf_s(buf, 32, "Hotkey%.2d", i);
 		ini.WriteInt("Hotkeys", buf, Hotkeys[i].Key, true);
-		//sprintf_s(buf, 32, "Hotkey%.2d", i);
 		ini.WriteInt("HotkeysEnabled", buf, (int)Hotkeys[i].Enabled, false);
-		//sprintf_s(buf, 32, "Hotkey%.2d", i);
 		ini.WriteString("HotkeysCommand", buf, Hotkeys[i].Command);
 	}
 }
@@ -389,7 +381,6 @@ void ExecuteCommand(SHotkey *hk)
 		break;
 	case HotkeyCommand::Attack:
 		CTibia::AttackTarget(hk->Arg1);
-		//CPacket::Move(0);
 		break;
 	}
 }
@@ -410,7 +401,6 @@ int CALLBACK HotkeysProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 		{
 		case IDOK:
 			ApplyNewHotkeys(hWnd);
-			//EndDialog(hWnd, 0);
 			break;
 		case IDCANCEL:
 			EndDialog(hWnd, 0);

@@ -30,27 +30,17 @@ typedef void (__cdecl *_PlaceObject)(int nX, int nY, int nZ, int nID, int nCount
 typedef void (__cdecl *_PlaceObject2)(int nX, int nY, int nZ, int u1, int nID, int nCount, int u2);
 typedef void (__cdecl *_StatusMessage)(char *message, int arg);
 typedef void (__cdecl *_MessageHandle)(unsigned int u1, char *lpMessage, unsigned int nType, char *lpName, unsigned int nLevel, unsigned int u2, unsigned int u3, unsigned int u4, unsigned int u5, unsigned int u6, unsigned int u7, unsigned int u8, unsigned int u9);
-//typedef void (__cdecl *_MessageHandle)(int nType, char *lpName, int u1, char *lpMessage, int u2);
 typedef void (__cdecl *_LookMessage)(int arg1, char *message);
-//typedef int (WINAPI *_Recv)(SOCKET s, char* buf, int len, int flags);
-//typedef int (WINAPI *_Send)(SOCKET s, char* buf, int len, int flags);
 
-extern _PrintText PrintText;//(_PrintText)Address::CALL_PRINTTEXT;
-extern _PlaceObject PlaceObject;//(_PlaceObject)Address::CALL_PLACEOBJECT;
-extern _PlaceObject2 PlaceObject2;//(_PlaceObject2)Address::CALL_PLACEOBJECT2;
+extern _PrintText PrintText;
+extern _PlaceObject PlaceObject;
+extern _PlaceObject2 PlaceObject2;
 extern _StatusMessage StatusMessage;
-extern _MessageHandle MessageHandle;//(_MessageHandle)Address::CALL_MESSAGEHANDLE;
-extern _LookMessage LookMessage;//(_LookMessage)Address::CALL_LOOKMESSAGE;
-//static _Recv Recv = 0;
-//static _Recv Send = 0;
-//
-//extern DWORD ping;
-//
-//int WINAPI MyRecv(SOCKET s, char* buf, int len, int flags);
-//int WINAPI MySend(SOCKET s, char* buf, int len, int flags);
+extern _MessageHandle MessageHandle;
+extern _LookMessage LookMessage;
+
 void MyLookMessage(int arg1, char *message);
 void MyMessageHandle(unsigned int u1, char *lpMessage, unsigned int nType, char *lpName, unsigned int nLevel, unsigned int u2, unsigned int u3, unsigned int u4, unsigned int u5, unsigned int u6, unsigned int u7, unsigned int u8, unsigned int u9);
-//void MyMessageHandle(int nType, char *lpName, int u1, char *lpMessage, int u2);
 void MyPlaceObject(int nX, int nY, int nZ, int nID, int nCount, int u1);
 void MyPlaceObject2(int nX, int nY, int nZ, int u1, int nID, int nCount, int u2);
 void MyPrintName(int nSurface, int nX, int nY, int nFont, int nRed, int nGreen, int nBlue, char* lpText, int nAlign);

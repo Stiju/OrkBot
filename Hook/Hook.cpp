@@ -10,12 +10,11 @@
 #include "Toggler.h"
 #include "Memory.h"
 #include "Hotkeys.h"
-//#include "Link.h"
 #include "Ini.h"
 #include "LootList.h"
 #include "Hook.h"
 
-#define _DEBUGMODE 1
+#define _DEBUGMODE 0
 
 #pragma comment(lib, "comctl32.lib")
 
@@ -31,12 +30,12 @@ SItemList HealingItems[] = {
 
 DWORD ping = 0;
 
-_PrintText PrintText = 0;//(_PrintText)Address::CALL_PRINTTEXT;
-_PlaceObject PlaceObject = 0;//(_PlaceObject)Address::CALL_PLACEOBJECT;
-_PlaceObject2 PlaceObject2 = 0;//(_PlaceObject2)Address::CALL_PLACEOBJECT2;
+_PrintText PrintText = 0;
+_PlaceObject PlaceObject = 0;
+_PlaceObject2 PlaceObject2 = 0;
 _StatusMessage StatusMessage = (_StatusMessage)Address::FUNC_STATUSMESSAGE;
-_MessageHandle MessageHandle = 0;//(_MessageHandle)Address::CALL_MESSAGEHANDLE;
-_LookMessage LookMessage = 0;//(_LookMessage)Address::CALL_LOOKMESSAGE;
+_MessageHandle MessageHandle = 0;
+_LookMessage LookMessage = 0;
 
 void GetError(DWORD dwErrorCode, char *lpFunction)
 {
@@ -119,10 +118,6 @@ void MyPrintName(int nSurface, int nX, int nY, int nFont, int nRed, int nGreen, 
 	}
 }
 
-/*	double sqmpx = gs->Width / 15;
-	double x = gs->X + (sqmpx * (7+ -(c->X - px))) + (sqmpx / 2);
-	double y = gs->Y + (sqmpx * (5+ -(c->Y - py))) + (sqmpx / 2) - 5;*/
-
 void MyPlaceObject(int nX, int nY, int nZ, int nID, int nCount, int u1)
 {
 	if(bMagwallTimer == true)
@@ -154,7 +149,6 @@ void MyPlaceObject(int nX, int nY, int nZ, int nID, int nCount, int u1)
 
 			Magwalls[MagwallCount].X = *playerX + x + z;
 			Magwalls[MagwallCount].Y = *playerY + y + z;
-			//Magwalls[MagwallCount].Z = u1;
 			if(nID == 10181 || nID == 2128 || nID == 2129)
 				Magwalls[MagwallCount].Time = timeGetTime() + (1000 * 20);
 			else
@@ -196,7 +190,6 @@ void MyPlaceObject2(int nX, int nY, int nZ, int u1, int nID, int nCount, int u2)
 
 			Magwalls[MagwallCount].X = *playerX + x + z;
 			Magwalls[MagwallCount].Y = *playerY + y + z;
-			//Magwalls[MagwallCount].Z = u1;
 			if(nID == 10181 || nID == 2128 || nID == 2129)
 				Magwalls[MagwallCount].Time = timeGetTime() + (1000 * 20);
 			else
@@ -246,7 +239,8 @@ void MyPrintFps(int nSurface, int nX, int nY, int nFont, int nRed, int nGreen, i
 			nY += 12;
 		}
 
-		/*char buf[256];
+#if _DEBUGMODE
+		char buf[256];
 		SCreature *c = (SCreature*)CTibia::GetPlayer();
 		if(c != 0)
 		{
@@ -292,11 +286,9 @@ void MyPrintFps(int nSurface, int nX, int nY, int nFont, int nRed, int nGreen, i
 			sprintf_s(buf, 256, "Player Not Found");
 			PrintText(nSurface, nX, nY, nFont, 255, 0, 0, buf, nAlign);
 			nY += 12;
-		} */
+		}
+#endif
 	}
-	//char pingbuffer[32];
-	//sprintf_s(pingbuffer, 32, "Ping: %d", ping);
-	//PrintText(nSurface, 50, 50, nFont, 255, 255, 255, pingbuffer, nAlign);
 }
 
 void MyMessageHandle(unsigned int u1, char *lpMessage, unsigned int nType, char *lpName, unsigned int nLevel, unsigned int u2, unsigned int u3, unsigned int u4, unsigned int u5, unsigned int u6, unsigned int u7, unsigned int u8, unsigned int u9)
@@ -360,29 +352,6 @@ DWORD HookCall(DWORD dwAddress, DWORD dwFunction)
 	VirtualProtectEx(GetCurrentProcess(), (LPVOID)(dwAddress), 5, dwOldProtect, &dwNewProtect);
 	return dwOldCall;
 }
-
-//DWORD start;
-//bool bSent = false;
-//int WINAPI MyRecv(SOCKET s, char* buf, int len, int flags)
-//{
-//	int ret = Recv(s, buf, len, flags);
-//	//if(bSent)
-//	//{
-//	//	ping = GetTickCount() - start;
-//	//	bSent = false;
-//	//}
-//	return ret;
-//}
-//
-//int WINAPI MySend(SOCKET s, char* buf, int len, int flags)
-//{
-//	start = GetTickCount();
-//	int ret = Send(s, buf, len, flags);
-//	if(ret > 0)
-//		ping = GetTickCount() - start;
-//	//bSent = true;
-//	return ret;
-//}
 
 PBYTE HookApi(DWORD dwAddress, DWORD dwFunction)
 {
@@ -530,7 +499,6 @@ void InitializeWindow(HWND hWnd, HINSTANCE hInstance)
 
 	hUseAllySpell		= w.CreateCheckBox("Use Exura Sio", 185, 220, 160, 15, IDC_AUTOHEALALLY);
 	hUseAllyItem		= w.CreateCheckBox("Use Ultimate Healing Rune", 185, 240, 160, 15, IDC_AUTOHEALALLY);
-	//hAllyAntiParalyze	= w.CreateCheckBox("AntiParalyze", 15, 240, 80, 15, 0);
 	hTeamMarks			= w.CreateCheckBox("Team Marks", 15, 200, 160, 15, IDC_TEAMMARKS);
 	hTeamColors			= w.CreateCheckBox("Team Colors", 15, 220, 160, 15, IDC_TEAMCOLORS);
 	hLeastHPP			= w.CreateCheckBox("Choose target with least hp%", 15, 240, 160, 15, IDC_LEASTHPP);
@@ -541,11 +509,8 @@ void InitializeWindow(HWND hWnd, HINSTANCE hInstance)
 	hSpellTimers		= w.CreateCheckBox("Spell Timers", 15, 320, 160, 15, IDC_SPELLTIMERS);
 	hXRay				= w.CreateCheckBox("X-Ray", 185, 320, 160, 15, IDC_XRAY);
 	hShowTarget			= w.CreateCheckBox("Show Target", 15, 340, 160, 15, IDC_SHOWTARGET);
-	//hFullLight			= w.CreateCheckBox("Full Light", 185, 340, 160, 15, IDC_FULLLIGHT);
 	hShowItemID			= w.CreateCheckBox("Show Item ID", 185, 340, 160, 15, IDC_SHOWITEMID);
 	hFullLight			= w.CreateCheckBox("ReAttack", 15, 360, 160, 15, IDC_FULLLIGHT);
-
-	//CreateWindowExA(WS_EX_STATICEDGE, "msctls_hotkey32", "", WS_CHILD | WS_VISIBLE, 185, 320, 120, 20, hWnd, (HMENU)0, hInstance, 0);
 	
 	for(int i = 0; i < (sizeof(HealingItems)/sizeof(HealingItems[0])); i++)
 		SendMessage(hHealItem, LB_INSERTSTRING, -1, (LPARAM)HealingItems[i].Name);
@@ -701,9 +666,6 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 		case IDC_MAGWALLTIMER:
 			{
 				ToggleMagwallTimer();
-				//DWORD dwthreadid;
-				//HANDLE hthread;
-				//hthread = CreateThread(NULL, 0, LinkServer, 0, 0, &dwthreadid);
 			}break;
 		case IDC_SPELLTIMERS:
 			{
@@ -733,14 +695,10 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 		case ID_FILE_SAVESETTINGS:
 			{
 				SaveSettings();
-				//DWORD dwthreadid;
-				//HANDLE hthread;
-				//hthread = CreateThread(NULL, 0, LinkServer, 0, 0, &dwthreadid);
 			}break;
 		case ID_FILE_LOADSETTINGS:
 			{
 				LoadSettings();
-				//FixTibiaLogin();
 			}break;
 		case ID_FILE_OPENTEAMLIST:
 			{
@@ -893,10 +851,6 @@ int KeyMod(void)
 		keystate[VK_NEXT] & 0x80 ||
 		keystate[VK_END] & 0x80 ||
 		keystate[VK_HOME] & 0x80 ||
-		//keystate[VK_LEFT] & 0x80 ||
-		//keystate[VK_UP] & 0x80 ||
-		//keystate[VK_RIGHT] & 0x80 ||
-		//keystate[VK_DOWN] & 0x80 ||
 		keystate[VK_INSERT] & 0x80 ||
 		keystate[VK_NUMLOCK] & 0x80)
 		mod |= 8;
@@ -949,16 +903,6 @@ LRESULT CALLBACK HookProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
     return CallWindowProc(wndProc, hWnd, uMsg, wParam, lParam ); 
 } 
 
-/*FILE *logfile;
-
-void log(char *lpstr)
-{
-	if(logfile)
-	{
-		fprintf(logfile, "%s\n", lpstr);
-	}
-}*/
-
 BOOL WINAPI DllMain(HMODULE hModule, DWORD dwReason, LPVOID lpReserved)
 {
 	switch(dwReason)
@@ -985,14 +929,6 @@ BOOL WINAPI DllMain(HMODULE hModule, DWORD dwReason, LPVOID lpReserved)
 
 			hMainThread[0] = CreateThread(NULL, 0, MainThread, 0, 0, &dwMainThreadId[0]);
 
-			//HookCall(Address::ADDR_PRINTNAME, (DWORD)&MyPrintName);
-			//HookCall(Address::ADDR_PRINTFPS, (DWORD)&MyPrintFps);
-			//HookCall(Address::ADDR_PLACEOBJECT, (DWORD)&MyPlaceObject);
-			//HookCall(Address::ADDR_PLACEOBJECT2, (DWORD)&MyPlaceObject2);
-			//HookCall(Address::ADDR_MESSAGEHANDLE, (DWORD)&MyMessageHandle);
-			//HookCall(Address::ADDR_LOOKMESSAGE, (DWORD)&MyLookMessage);
-
-
 			DetourCall(Address::CALL_PRINTFPS, (DWORD)&MyPrintFps, (LPDWORD)&PrintText);
 			DetourCall(Address::CALL_PRINTNAME, (DWORD)&MyPrintName, 0);
 			DetourCall(Address::CALL_PLACEOBJECT, (DWORD)&MyPlaceObject, (LPDWORD)&PlaceObject);
@@ -1000,40 +936,11 @@ BOOL WINAPI DllMain(HMODULE hModule, DWORD dwReason, LPVOID lpReserved)
 			DetourCall(Address::CALL_MESSAGEHANDLE, (DWORD)&MyMessageHandle, (LPDWORD)&MessageHandle);
 			DetourCall(Address::CALL_LOOKMESSAGE, (DWORD)&MyLookMessage, (LPDWORD)&LookMessage);
 
-			//CMemory::Nop(0x560B33, 6);
-			//HookCall(0x560B33, (DWORD)&MyRecv);
-			
-
-			//HookCall(Address::PRINTDMG, (DWORD)&MyPrintDmg);
-			//HookCall(Address::PRINTUSING, (DWORD)&MyPrintTextEx);
-			//Recv = (_Recv)HookApi((DWORD)GetProcAddress(GetModuleHandle("ws2_32.dll"), "recv"), (DWORD)&MyRecv);
-			//Send = (_Send)HookApi((DWORD)GetProcAddress(GetModuleHandle("ws2_32.dll"), "send"), (DWORD)&MySend);
-
 			CMemory::Nop(Address::ADDR_ALWAYSFPS, 6);
-			//CTibia::ShowInvisibleCreature();
-
-			/*char FileName[MAX_PATH];
-			GetModuleFileName(hMod, FileName, sizeof(FileName));
-			if(strrchr(FileName, '\\') != NULL)
-				*strrchr(FileName, '\\') = 0;
-			strcat_s(FileName, MAX_PATH, "\\LogFile.txt");
-			logfile = fopen(FileName, "w");
-			log("DLL_PROCESS_ATTACH");*/
-		}break;
-	case DLL_THREAD_ATTACH:
-		{
-			//log("DLL_THREAD_ATTACH");
-		}break;
-	case DLL_THREAD_DETACH:
-		{
-			//log("DLL_THREAD_DETACH");
 		}break;
 	case DLL_PROCESS_DETACH:
 		{
-			//log("DLL_PROCESS_DETACH");
 			Shell_NotifyIcon(NIM_DELETE, &niData);
-			//if(logfile)
-			//	fclose(logfile);
 		}break;
 	}
     return 1;

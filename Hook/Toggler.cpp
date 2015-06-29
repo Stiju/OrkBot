@@ -77,16 +77,6 @@ void ToggleHealer(void)
 		EnableWindow(hHealItem,			false);
 		EnableWindow(hHealItemHealth,	false);
 		bAutoHealer = true;
-		/* char buf2[512];
-		sprintf(buf2, "SpellHi.Spell = %s; SpellHi.Health = %d; SpellHi.Mana = %d; SpellHi.Use = %s;\n",
-			SpellHi.Spell, SpellHi.Health, SpellHi.Mana, SpellHi.Use?"True":"False");
-		MessageBox(g_hWnd, buf2, "AutoHealer", 0);
-		sprintf(buf2, "SpellLo.Spell = %s; SpellLo.Health = %d; SpellLo.Mana = %d; SpellLo.Use = %s;\n",
-			SpellLo.Spell, SpellLo.Health, SpellLo.Mana, SpellLo.Use?"True":"False");
-		MessageBox(g_hWnd, buf2, "AutoHealer", 0);
-		sprintf(buf2, "SpellHi.ItemID = %d; SpellHi.Health = %d; SpellHi.Mana = %d; SpellHi.Use = %s;\n",
-			HealItem.ItemID, HealItem.Health, HealItem.Mana, HealItem.Use?"True":"False");
-		MessageBox(g_hWnd, buf2, "AutoHealer", 0); */
 	}
 	else
 	{

@@ -1,4 +1,3 @@
-//#include <winsock2.h>
 #include <windows.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -30,36 +29,12 @@ CPacket::CPacket(void)
 CPacket::~CPacket(void)
 {
 }
-// TODO: Recreate SendFunction
-//void CPacket::SendPacket(unsigned char *packet)
-//{
-//	::SendPacket(GetCurrentProcessId(), packet, true, false);
-//}
 
-//void CPacket::SendPacket(unsigned char *packet)
-//{
-//	SOCKET *tSock = (unsigned int*)(*(unsigned int*)0x768C50) + 4;
-//	unsigned char temp[16096];
-//	unsigned char *key = (unsigned char*)0x768C7C;
-//	int ret = XTEA(true, 0, key, packet, temp, false);
-//	send(*tSock, (char*)temp, ret, 0);
-//}
-
-/*
-key
-07 78 CA 29 91 D7 90 5D B9 F1 2D DD BA 08 95 3C
-
-move north
-0C 00 14 04 1E 13 95 84 AF 79 90 15 AF 7E F8 50 99 6F DA 8E 09 A6 83 02 F4 CC 59 0A 09 B8 2E 43
-
-
-
-*/
 void CPacket::SendPacket(unsigned char *packet)
 {
 	SOCKET *socket;
 	_send mysend;
-	mysend = *(_send*)Address::SEND_ADR;//GetProcAddress(GetModuleHandle("ws2_32.dll"), "send");
+	mysend = *(_send*)Address::SEND_ADR;
 	
 	unsigned char temp[1024];
 	socket = (SOCKET*)((*(unsigned int*)Address::SOCKET_PTR)+4);
@@ -86,7 +61,7 @@ void CPacket::SayMessage(char *msg)
 
 	CPacket::SendPacket(packet);
 }
-//0D 00 84 FF FF 00 00 00 58 0C 00 E8 47 00 10 
+
 void CPacket::UseOnTarget(int itemId, int container, int pos, int targetId)
 {
 	unsigned char packet[15];

@@ -5,7 +5,6 @@ CWin::CWin(HWND hWnd, HINSTANCE hInstance)
 {
 	m_hWnd = hWnd;
 	m_hInstance = hInstance;
-	//m_hFont = (HFONT)GetStockObject(DEFAULT_GUI_FONT);
 	NONCLIENTMETRICS ncm;
 	ncm.cbSize = sizeof(NONCLIENTMETRICS);
 	SystemParametersInfo(SPI_GETNONCLIENTMETRICS, sizeof(ncm), &ncm, 0);

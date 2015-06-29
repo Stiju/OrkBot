@@ -36,43 +36,6 @@ struct SCreature {
 	unsigned int GUILDWARFlag;
 	unsigned int IsBlocking;
 };
-/*
-struct SCreature{
-	unsigned int CreatureID;
-	char Name[32];
-	unsigned int X;
-	unsigned int Y;
-	unsigned int Z;
-	signed int MoveX;
-	signed int MoveY;
-	unsigned int unknown1;
-	unsigned int unknown2;
-	unsigned int unknown3;
-	unsigned int unknown4;
-	unsigned int unknown5;
-	unsigned int IsWalking;
-	unsigned int Direction;
-	unsigned int WalkDirection;
-	unsigned int unknown6;
-	unsigned int unknown7;
-	unsigned int OutfitType;
-	unsigned int OutfitData[4];
-	//unsigned int Head;
-	//unsigned int Body;
-	//unsigned int Legs;
-	//unsigned int Feet;
-	unsigned int Addon;
-	unsigned int Light;
-	unsigned int LightColor;
-	unsigned int unknown8;
-	unsigned int unknown9;
-	unsigned int Health;
-	unsigned int Speed;
-	unsigned int IsVisible;
-	unsigned int PKFlag;
-	unsigned int PARTYFlag;
-	unsigned int unknown10;
-}; */
 
 struct SContainerItem{
 	unsigned int ItemID;

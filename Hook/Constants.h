@@ -1,46 +1,33 @@
 #pragma once
-//const unsigned int CALL_LOOKMESSAGE                         = 0x00413AFF;//!860
+
 namespace Address {
-	const unsigned int GAME_PTR                                 = 0x0023EAA8;//872 VipStart
-	// Call functions
-	//const unsigned int CALL_PRINTTEXT                           = 0x004B4130;//855
-	//const unsigned int CALL_PLACEOBJECT                         = 0x004E2670;//855 0x6A
-	//const unsigned int CALL_PLACEOBJECT2                        = 0x004E1800;//855 0x6A
-	//const unsigned int CALL_MESSAGEHANDLE                       = 0x005404C0;//854 0xAA
-	const unsigned int FUNC_STATUSMESSAGE                       = 0x005466D0;//872
-	//const unsigned int CALL_LOOKMESSAGE                         = 0x00545980;//!854 0xB4
-	//const unsigned int CALL_PROJECTILE                          = 0x004E0AA0;//854? 0x85
-	const unsigned int FUNC_FLOATTEXT                           = 0x004E5340;//872 0x85 +1 ?
-	//const unsigned int CALL_CHANGEHEALTH                        = 0x004108E0;//854 0x8C
-	//const unsigned int CALL_TEXTMESSAGE                         = 0x004136F0;//854 0xB4
+	const unsigned int GAME_PTR                                 = 0x0023EAA8;
+	const unsigned int FUNC_STATUSMESSAGE                       = 0x005466D0;
+	const unsigned int FUNC_FLOATTEXT                           = 0x004E5340;
 
-	const unsigned int FUNC_RANDOMBYTE                          = 0x00542400;//872
-	const unsigned int FUNC_SENDLOOK                            = 0x004073B0;//872
+	const unsigned int FUNC_RANDOMBYTE                          = 0x00542400;
+	const unsigned int FUNC_SENDLOOK                            = 0x004073B0;
 
-	const unsigned int FUNC_RENDERGAME                          = 0x0045B2F0;//872
+	const unsigned int FUNC_RENDERGAME                          = 0x0045B2F0;
 
-	const unsigned int CALL_PROJECTILE                          = 0x004105C0;//872
-	//const unsigned int ADDR_LOOKMESSAGE                         = 0x0041376F;//!854
-	const unsigned int CALL_LOOKMESSAGE                         = 0x00413A51;//!872 ?
-	const unsigned int CALL_MESSAGEHANDLE                       = 0x004129B7;//872 0xAA
-	const unsigned int CALL_PLACEOBJECT                         = 0x0040E1E6;//872 0x6A
-	const unsigned int CALL_PLACEOBJECT2                        = 0x0040E212;//872
-	const unsigned int CALL_CHANGEHEALTH                        = 0x0045DB66;//872 0x8C
-	const unsigned int CALL_TEXTMESSAGE                         = 0x0045DCB6;//872 ?
-	const unsigned int CALL_SETACTION                           = 0x0045868D;//872
-//0044E700   .  55            PUSH EBP
+	const unsigned int CALL_PROJECTILE                          = 0x004105C0;
+	const unsigned int CALL_LOOKMESSAGE                         = 0x00413A51;
+	const unsigned int CALL_MESSAGEHANDLE                       = 0x004129B7;
+	const unsigned int CALL_PLACEOBJECT                         = 0x0040E1E6;
+	const unsigned int CALL_PLACEOBJECT2                        = 0x0040E212;
+	const unsigned int CALL_CHANGEHEALTH                        = 0x0045DB66;
+	const unsigned int CALL_TEXTMESSAGE                         = 0x0045DCB6;
+	const unsigned int CALL_SETACTION                           = 0x0045868D;
 
-
-	const unsigned int CALL_PRINTNAME                           = 0x004F54A3;//872
-	const unsigned int CALL_PRINTFPS                            = 0x0045B618;//872
-	const unsigned int ADDR_ALWAYSFPS                           = 0x0045B554;//872
-	const unsigned int SHOW_FPS                                 = 0x0063EA1C;//872
+	const unsigned int CALL_PRINTNAME                           = 0x004F54A3;
+	const unsigned int CALL_PRINTFPS                            = 0x0045B618;
+	const unsigned int ADDR_ALWAYSFPS                           = 0x0045B554;
+	const unsigned int SHOW_FPS                                 = 0x0063EA1C;
 
 	// ContextMenu
-	const unsigned int FUNC_ADDCONTEXTMENU                      = 0x00453930;//872
-	//const unsigned int CALL_ONCLICKCONTEXTMENU_PTR              = 0x005B77F0;//854
-	const unsigned int EVENT_ONCLICKCONTEXTMENU                 = 0x00450510;//872
-	const unsigned int CALL_CONTEXTMENU_MESSAGE                 = 0x004545F5;//872
+	const unsigned int FUNC_ADDCONTEXTMENU                      = 0x00453930;
+	const unsigned int EVENT_ONCLICKCONTEXTMENU                 = 0x00450510;
+	const unsigned int CALL_CONTEXTMENU_MESSAGE                 = 0x004545F5;
 	// End ContextMenu
 
 	// Memory auto generated 872
@@ -130,25 +117,24 @@ namespace Address {
 	const unsigned int RIGHT_CLICK_ITEM_COUNT                   = 0x007CA33C;
 	// auto generated end
 
-	const unsigned int PLAYER_Z                                 = 0x0067CA30;//872
-	const unsigned int PLAYER_Y                                 = 0x0067CA34;//872
-	const unsigned int PLAYER_X                                 = 0x0067CA38;//872
+	const unsigned int PLAYER_Z                                 = 0x0067CA30;
+	const unsigned int PLAYER_Y                                 = 0x0067CA34;
+	const unsigned int PLAYER_X                                 = 0x0067CA38;
 
-	const unsigned int XRAY                                     = 0x004F247B;//872
-	const unsigned int LEVELSPY1                                = 0x004F433A;//872
-	const unsigned int LEVELSPY2                                = 0x004F443F;//872
-	const unsigned int LEVELSPY3                                = 0x004F44C0;//872
-	const unsigned int LEVELSPYPTR                              = 0x0067968C;//872
-	const unsigned int GAMESCREENPTR                            = 0x0067C9F8;//872
+	const unsigned int XRAY                                     = 0x004F247B;
+	const unsigned int LEVELSPY1                                = 0x004F433A;
+	const unsigned int LEVELSPY2                                = 0x004F443F;
+	const unsigned int LEVELSPY3                                = 0x004F44C0;
+	const unsigned int LEVELSPYPTR                              = 0x0067968C;
+	const unsigned int GAMESCREENPTR                            = 0x0067C9F8;
 
-	const unsigned int SEND_ADR                                 = 0x005B9614;//872
-	const unsigned int SOCKET_PTR                               = 0x007C6CC0;//872
-	const unsigned int PACKET_PTR                               = SOCKET_PTR + 0x1C;//860
-	const unsigned int XTEA_KEY                                 = SOCKET_PTR + 0x2C;//860
-	const unsigned int ISONLINE                                 = CONNECTION_STATUS;//841
-	const unsigned int LOOKITEMID                               = RIGHT_CLICK_ITEM_ID;//841
-
-};//004EE140   .  8986 D8250000 MOV DWORD PTR DS:[ESI+25D8],EAX
+	const unsigned int SEND_ADR                                 = 0x005B9614;
+	const unsigned int SOCKET_PTR                               = 0x007C6CC0;
+	const unsigned int PACKET_PTR                               = SOCKET_PTR + 0x1C;
+	const unsigned int XTEA_KEY                                 = SOCKET_PTR + 0x2C;
+	const unsigned int ISONLINE                                 = CONNECTION_STATUS;
+	const unsigned int LOOKITEMID                               = RIGHT_CLICK_ITEM_ID;
+};
 
 
 namespace HardcoreBytes {
